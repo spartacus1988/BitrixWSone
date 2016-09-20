@@ -9,11 +9,12 @@ if(!CModule::IncludeModule("webservice") || !CModule::IncludeModule("iblock"))
 // наш новый класс наследуется от базового IWebService
 class CChangeElement extends IWebService
 {
-	function exchange($iblock, $params){
-		$arReturn = array('result'=>'OK','error'=>0);
+	/*function exchange($iblock, $params)
+    {
 		define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/log.txt");
 		AddMessage2Log(print_r($params, true), "webservice");
-		foreach ($params as $value) {
+		foreach ($params as $value)
+		{
 			CIBlockElement::SetPropertyValuesEx(
 				$value['element'],
 				$iblock,
@@ -22,11 +23,26 @@ class CChangeElement extends IWebService
 		}
 		
 		$mess = 'OK';
-		$arReturn['result'] = $mess;
-		$arReturn['error'] = '0';
-	
-		return $arReturn;9
-	}
+		return $mess;
+	}*/
+
+
+    function putFile($MassOfByte,  $FileName,  $PosNumber)
+    {
+        $mess = 'OK';
+        return $mess;
+
+    }
+
+
+
+
+
+
+
+
+
+
    // метод GetWebServiceDesc возвращает описание сервиса и его методов
    function GetWebServiceDesc() 
    {
@@ -40,31 +56,54 @@ class CChangeElement extends IWebService
       $wsdesc->classTypes = array();
       $wsdesc->structTypes = Array();
       
-      $wsdesc->structTypes["arParam"] = array(
-      	"element"=> array("varType" => "integer", "strict" => "no"),
-		"code" => array("varType" => "string", "strict" => "no"),
-		"val" => array("varType" => "string", "strict" => "no"),
-	  );
-	  $wsdesc->structTypes["arMessage"] = array(
-		"result" => array("varType" => "string", "strict" => "no"),
-		"error" => array("varType" => "string", "strict" => "no"),
-	  );
+      //    $wsdesc->structTypes["arParam"] = array(
+      //	"element"=> array("varType" => "integer", "strict" => "no"),
+      //    "code" => array("varType" => "string", "strict" => "no"),
+	  //	"val" => array("varType" => "string", "strict" => "no"),
+	  //    );
+	  //     $wsdesc->structTypes["arMessage"] = array(
+	  //	"result" => array("varType" => "string", "strict" => "no"),
+	  //	"error" => array("varType" => "string", "strict" => "no"),
+	  //    );
 		
-      $wsdesc->classes = array(
-   		"CChangeElement"=> array(
-      		"exchange" => array(
-      		   "type"      => "public",
-      		   "input"      => array(
-       		     "iblock" => array("varType" => "integer", "strict" => "no"),
-      			 "params" => array("varType" => "ArrayOfArParam","arrType" => "arParam", "strict" => "no"),
-            	),
-         		"output"   => array(
-            		array("varType" => "arMessage", "strict" => "no")
-         		),
-         		"httpauth" => "N"
-      		),
+      $wsdesc->classes = array
+      (
+   		"CChangeElement"=> array
+        (
+            "putFile" => array
+            (
+                "type"      => "public",
+                "input"      => array
+                (
+
+                    "MassOfByte" => array("varType" => "integer", "strict" => "no"),
+                    "FileName" => array("varType" => "string", "strict" => "no"),
+                    "PosNumber" => array("varType" => "string", "strict" => "no"),
+                ),
+                "output"   => array
+                (
+                    array("varType" => "string", "strict" => "no")
+                ),
+                "httpauth" => "N"
+            ),
+
+
+      		//"exchange" => array
+            //(
+      		//   "type"      => "public",
+      		//   "input"      => array
+            //   (
+       		//     "iblock" => array("varType" => "integer", "strict" => "no"),
+      		//	   "params" => array("varType" => "ArrayOfArParam","arrType" => "arParam", "strict" => "no"),
+            //	  ),
+         	//	  "output"   => array
+            //    (
+            //		  array("varType" => "arMessage", "strict" => "no")
+         	//	   ),
+         	//	"httpauth" => "N"
+      		//),
    		)
-	);
+	  );
 
       return $wsdesc;
    }
