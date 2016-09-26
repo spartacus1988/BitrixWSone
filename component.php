@@ -31,16 +31,7 @@ class CChangeElement extends IWebService
     {
         $mess = 'OK';
         return $mess;
-
     }
-
-
-
-
-
-
-
-
 
 
    // метод GetWebServiceDesc возвращает описание сервиса и его методов
@@ -82,9 +73,9 @@ class CChangeElement extends IWebService
                 ),
                 "output"   => array
                 (
-                    array("varType" => "string", "strict" => "no")
+                    "id" =>array("varType" => "string", "strict" => "no")
                 ),
-                "httpauth" => "N"
+                "httpauth" => "Y"
             ),
 
 
